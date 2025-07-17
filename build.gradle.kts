@@ -24,10 +24,21 @@ repositories {
 }
 
 dependencies {
-	implementation("org.springframework.boot:spring-boot-starter-web")
+	// spring
+	implementation("org.springframework.boot:spring-boot-starter")
+	implementation("org.springframework.boot:spring-boot-starter-aop")
+	implementation("org.springframework.boot:spring-boot-starter-validation")
+	testImplementation("org.springframework.boot:spring-boot-starter-test")
+
+	// cache
+	implementation("org.redisson:redisson:3.40.0")
+	implementation("com.github.ben-manes.caffeine:caffeine")
+
+	// lombok
 	compileOnly("org.projectlombok:lombok")
 	annotationProcessor("org.projectlombok:lombok")
-	testImplementation("org.springframework.boot:spring-boot-starter-test")
+
+	// test
 	testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 }
 
