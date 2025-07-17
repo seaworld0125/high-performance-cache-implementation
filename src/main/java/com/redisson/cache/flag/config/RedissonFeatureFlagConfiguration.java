@@ -1,8 +1,12 @@
-package com.redisson.cache.flag;
+package com.redisson.cache.flag.config;
 
 import com.github.benmanes.caffeine.cache.Cache;
 import com.github.benmanes.caffeine.cache.Caffeine;
-import com.redisson.cache.flag.util.FeatureFlagKeyGenerator;
+import com.redisson.cache.flag.FeatureFlagAspect;
+import com.redisson.cache.flag.FeatureFlagManager;
+import com.redisson.cache.flag.RedissonFeatureFlagLocalCacheManager;
+import com.redisson.cache.flag.RedissonFeatureFlagManager;
+import com.redisson.cache.flag.RedissonKeyUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.redisson.api.RMapCache;
 import org.redisson.api.RedissonClient;
@@ -33,7 +37,7 @@ public class RedissonFeatureFlagConfiguration {
   ) {
     if(redissonFeatureFlagProperties.enableLocalCache()) {
       var redissonFeatureFlagLocalCacheProperties = redissonFeatureFlagProperties.localCache();
-      var cacheName = FeatureFlagKeyGenerator.featureFlagHashKey(applicationName);
+      var cacheName = RedissonKeyUtils.featureFlagHashKey(applicationName);
 
       RMapCache<String, Boolean> remoteCache = redissonClient.getMapCache(cacheName);
       Cache<String, Boolean> localCache = Caffeine.newBuilder()

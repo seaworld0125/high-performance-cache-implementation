@@ -1,7 +1,6 @@
 package com.redisson.cache.flag;
 
 import com.github.benmanes.caffeine.cache.Cache;
-import com.redisson.cache.flag.util.FeatureFlagKeyGenerator;
 import jakarta.validation.constraints.NotEmpty;
 import java.time.Duration;
 import java.util.concurrent.TimeUnit;
@@ -45,7 +44,7 @@ public class RedissonFeatureFlagLocalCacheManager implements FeatureFlagManager 
 
     @Override
     public boolean isEnabled(@NotEmpty String name, boolean defaultValue) {
-        String key = FeatureFlagKeyGenerator.featureFlagEnabledKey(name);
+        String key = RedissonKeyUtils.featureFlagEnabledKey(name);
         Boolean value = localCache.getIfPresent(key);
         if (value != null) {
             log.debug("[LocalCache] cache hit. key: {}, value: {}", key, value);
@@ -65,7 +64,7 @@ public class RedissonFeatureFlagLocalCacheManager implements FeatureFlagManager 
 
     @Override
     public void setEnabled(@NotEmpty String name, boolean enabled, Duration duration) {
-        String key = FeatureFlagKeyGenerator.featureFlagEnabledKey(name);
+        String key = RedissonKeyUtils.featureFlagEnabledKey(name);
         log.debug("[LocalCache & RemoteCache] init. key: {}, value: {}, ttl: {}", key, enabled, duration);
         remoteCache.put(key, enabled, duration.toMillis(), TimeUnit.MILLISECONDS);
         localCache.put(key, enabled);
@@ -73,7 +72,7 @@ public class RedissonFeatureFlagLocalCacheManager implements FeatureFlagManager 
 
     @Override
     public void setEnabled(@NotEmpty String name, boolean enabled) {
-        String key = FeatureFlagKeyGenerator.featureFlagEnabledKey(name);
+        String key = RedissonKeyUtils.featureFlagEnabledKey(name);
         log.debug("[LocalCache & RemoteCache] init. key: {}, value: {}", key, enabled);
         remoteCache.put(key, enabled);
         localCache.put(key, enabled);
@@ -81,7 +80,7 @@ public class RedissonFeatureFlagLocalCacheManager implements FeatureFlagManager 
 
     @Override
     public void remove(@NotEmpty String name) {
-        String key = FeatureFlagKeyGenerator.featureFlagEnabledKey(name);
+        String key = RedissonKeyUtils.featureFlagEnabledKey(name);
         log.debug("[LocalCache & RemoteCache] remove. key: {}", key);
         remoteCache.remove(key);
         localCache.invalidate(key);

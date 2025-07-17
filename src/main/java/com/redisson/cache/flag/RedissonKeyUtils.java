@@ -1,6 +1,6 @@
-package com.redisson.cache.flag.util;
+package com.redisson.cache.flag;
 
-public class FeatureFlagKeyGenerator {
+public class RedissonKeyUtils {
 
   public static String featureFlagHashKey(String namespace) {
     return namespace + ":feature-flag";

@@ -1,6 +1,6 @@
 package com.redisson.cache.flag.annotation;
 
-import com.redisson.cache.flag.RedissonFeatureFlagConfiguration;
+import com.redisson.cache.flag.config.RedissonFeatureFlagConfiguration;
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;

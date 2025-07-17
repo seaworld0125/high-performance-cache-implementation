@@ -48,5 +48,8 @@ public interface FeatureFlagManager {
    */
   void setEnabled(@NotEmpty String name, boolean enabled, Duration duration);
 
+  /**
+   * 지정된 이름의 피처 플래그를 제거합니다.
+   * */
   void remove(@NotEmpty String name);
 }

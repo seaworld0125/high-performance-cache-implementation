@@ -1,4 +1,4 @@
-package com.redisson.cache.flag;
+package com.redisson.cache.flag.config;
 
 import java.time.Duration;
 import org.springframework.boot.context.properties.ConfigurationProperties;

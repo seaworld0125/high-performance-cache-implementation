@@ -1,6 +1,5 @@
 package com.redisson.cache.flag;
 
-import com.redisson.cache.flag.util.FeatureFlagKeyGenerator;
 import jakarta.validation.constraints.NotEmpty;
 import java.time.Duration;
 import lombok.RequiredArgsConstructor;
@@ -18,7 +17,7 @@ public class RedissonFeatureFlagManager implements FeatureFlagManager {
   protected final String namespace;
 
   protected RBucket<Boolean> getBucket(@NotEmpty String name) {
-    String key = FeatureFlagKeyGenerator.featureFlagEnableFullKey(namespace, name);
+    String key = RedissonKeyUtils.featureFlagEnableFullKey(namespace, name);
     return redissonClient.getBucket(key);
   }
 
